@@ -41,8 +41,8 @@ public class BookController {
 
     @PostMapping
     public ResponseEntity<?> addBook(@Valid @RequestBody Book book,
-                                          @RequestHeader(value = "Trace-Id", defaultValue = "") String traceId,
-                                          @RequestHeader(value = "Authorization") String bearerToken)
+                                          @RequestHeader(value = "Trace-Id", defaultValue = "") String traceId/*,
+                                          @RequestHeader(value = "Authorization") String bearerToken*/)
             throws LibraryResourceAlreadyExistException, LibraryResourceUnauthorizedException, LibraryResourceNotFoundException {
 
         logger.debug("Request to add Book: {}", book);
@@ -50,10 +50,10 @@ public class BookController {
             traceId = UUID.randomUUID().toString();
         }
 
-        if(!LibraryApiUtils.isUserAdmin(bearerToken)) {
+        /*if(!LibraryApiUtils.isUserAdmin(bearerToken)) {
             logger.error(LibraryApiUtils.getUserIdFromClaim(bearerToken) + " attempted to add a Book. Disallowed because user is not Admin");
             throw new LibraryResourceUnauthorizedException(traceId, "User not allowed to Add a Book");
-        }
+        }*/
         logger.debug("Added TraceId: {}", traceId);
         bookService.addBook(book, traceId);
 
@@ -64,18 +64,18 @@ public class BookController {
     @PutMapping(path = "/{bookId}")
     public ResponseEntity<?> updateBook(@PathVariable Integer bookId,
                                              @Valid @RequestBody Book book,
-                                             @RequestHeader(value = "Trace-Id", defaultValue = "") String traceId,
-                                             @RequestHeader(value = "Authorization") String bearerToken)
+                                             @RequestHeader(value = "Trace-Id", defaultValue = "") String traceId/*,
+                                             @RequestHeader(value = "Authorization") String bearerToken*/)
             throws LibraryResourceNotFoundException, LibraryResourceUnauthorizedException {
 
         if(!LibraryApiUtils.doesStringValueExist(traceId)) {
             traceId = UUID.randomUUID().toString();
         }
 
-        if(!LibraryApiUtils.isUserAdmin(bearerToken)) {
+        /*if(!LibraryApiUtils.isUserAdmin(bearerToken)) {
             logger.error(LibraryApiUtils.getUserIdFromClaim(bearerToken) + " attempted to update a Book. Disallowed because user is not Admin");
             throw new LibraryResourceUnauthorizedException(traceId, "User not allowed to Add a Book");
-        }
+        }*/
         logger.debug("Added TraceId: {}", traceId);
 
         book.setBookId(bookId);
@@ -87,18 +87,18 @@ public class BookController {
 
     @DeleteMapping(path = "/{bookId}")
     public ResponseEntity<?> deleteBook(@PathVariable Integer bookId,
-                                             @RequestHeader(value = "Trace-Id", defaultValue = "") String traceId,
-                                             @RequestHeader(value = "Authorization") String bearerToken)
+                                             @RequestHeader(value = "Trace-Id", defaultValue = "") String traceId/*,
+                                             @RequestHeader(value = "Authorization") String bearerToken*/)
             throws LibraryResourceNotFoundException, LibraryResourceUnauthorizedException {
 
         if(!LibraryApiUtils.doesStringValueExist(traceId)) {
             traceId = UUID.randomUUID().toString();
         }
 
-        if(!LibraryApiUtils.isUserAdmin(bearerToken)) {
+        /*if(!LibraryApiUtils.isUserAdmin(bearerToken)) {
             logger.error(LibraryApiUtils.getUserIdFromClaim(bearerToken) + " attempted to delete a Book. Disallowed because user is not Admin");
             throw new LibraryResourceUnauthorizedException(traceId, "User not allowed to Add a Book");
-        }
+        }*/
         logger.debug("Added TraceId: {}", traceId);
 
         bookService.deleteBook(bookId, traceId);
@@ -109,8 +109,8 @@ public class BookController {
     @PutMapping(path = "/{bookId}/authors")
     public ResponseEntity<?> addBookAuthors(@PathVariable Integer bookId,
                                         @RequestBody Set<Integer> authorIds,
-                                        @RequestHeader(value = "Trace-Id", defaultValue = "") String traceId,
-                                        @RequestHeader(value = "Authorization") String bearerToken)
+                                        @RequestHeader(value = "Trace-Id", defaultValue = "") String traceId/*,
+                                        @RequestHeader(value = "Authorization") String bearerToken*/)
             throws LibraryResourceNotFoundException, LibraryResourceUnauthorizedException,
             LibraryResourceBadRequestException {
 
@@ -122,11 +122,11 @@ public class BookController {
             logger.error("TraceId: {}, Please supply at least one author to be added!!", traceId);
             throw new LibraryResourceBadRequestException(traceId, "Please supply at least one author to be added");
         }
-        if(!LibraryApiUtils.isUserAdmin(bearerToken)) {
+        /*if(!LibraryApiUtils.isUserAdmin(bearerToken)) {
             logger.error(LibraryApiUtils.getUserIdFromClaim(bearerToken) + " attempted to add Authors to a Book. " +
                     "Disallowed because user is not Admin");
             throw new LibraryResourceUnauthorizedException(traceId, "User not allowed to add Authors to a Book");
-        }
+        }*/
         logger.debug("Added TraceId: {}", traceId);
 
         logger.debug("Returning response for TraceId: {}", traceId);

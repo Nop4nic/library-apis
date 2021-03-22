@@ -16,7 +16,7 @@ public class Book {
     private Integer bookId;
 
     @NotNull
-    @Size(min = 1, max = 50, message = "ISBN name must be between 1 and 50 characters")
+    @Size(min = 1, max = 50, message = "ISBN name must be between 1 and 50 characters ")
     private String isbn;
 
     @Size(min = 1, max = 50, message = "Title name must be between 1 and 50 characters")
@@ -26,7 +26,7 @@ public class Book {
 
     private Integer yearPublished;
 
-    @Size(min = 1, max = 20, message = "Edition name must be between 1 and 50 characters")
+    @Size(min = 1, max = 20, message = "Edition name must be between 1 and 50 characters ")
     private String edition;
 
     private BookStatus bookStatus;
@@ -48,7 +48,7 @@ public class Book {
         this.authors = authors;
     }
 
-    public Book(int bookId, String isbn, String title, int publisherid, int yearPublished, String edition,
+    public Book(int bookId,  String isbn, String title, int publisherid, int yearPublished, String edition,
                 BookStatus bookStatus) {
         this.bookId = bookId;
         this.isbn = isbn;

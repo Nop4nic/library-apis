@@ -4,13 +4,14 @@ import com.skb.course.apis.libraryapis.book.*;
 import com.skb.course.apis.libraryapis.exception.LibraryResourceAlreadyExistException;
 import com.skb.course.apis.libraryapis.exception.LibraryResourceNotFoundException;
 import com.skb.course.apis.libraryapis.security.SecurityConstants;
+import com.skb.course.apis.libraryapis.security.SecurityConstants;
 import com.skb.course.apis.libraryapis.util.LibraryApiUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+//import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -24,7 +25,7 @@ public class UserService {
     private static Logger logger = LoggerFactory.getLogger(UserService.class);
 
     private UserRepository userRepository;
-    private BCryptPasswordEncoder bCryptPasswordEncoder;
+    //private BCryptPasswordEncoder bCryptPasswordEncoder;
     private BookRepository bookRepository;
     private BookStatusRepository bookStatusRepository;
     private BookService bookService;
@@ -33,10 +34,12 @@ public class UserService {
     @Value("${library.rule.user.book.max.times.issue: 3}")
     private int maxNumberOfTimesIssue;
 
-    public UserService(BCryptPasswordEncoder bCryptPasswordEncoder, UserRepository userRepository,
-                       BookRepository bookRepository, BookStatusRepository bookStatusRepository,
-                       BookService bookService, UserBookEntityRepository userBookEntityRepository) {
-        this.bCryptPasswordEncoder = bCryptPasswordEncoder;
+    public UserService(/*BCryptPasswordEncoder bCryptPasswordEncoder*/ UserRepository userRepository,
+                                                                        BookRepository bookRepository,
+                                                                        BookStatusRepository bookStatusRepository,
+                                                                        BookService bookService,
+                                                                        UserBookEntityRepository userBookEntityRepository) {
+        // this.bCryptPasswordEncoder = bCryptPasswordEncoder;
         this.userRepository = userRepository;
         this.bookRepository = bookRepository;
         this.bookStatusRepository = bookStatusRepository;
@@ -51,7 +54,7 @@ public class UserService {
         logger.debug("TraceId: {}, Request to add User: {}", traceId, userToBeAdded);
         UserEntity userEntity = new UserEntity(
                 userToBeAdded.getUsername(),
-                bCryptPasswordEncoder.encode(SecurityConstants.NEW_USER_DEFAULT_PASSWORD),
+                /*bCryptPasswordEncoder.encode*/(SecurityConstants.NEW_USER_DEFAULT_PASSWORD),
                 userToBeAdded.getFirstName(),
                 userToBeAdded.getLastName(),
                 userToBeAdded.getDateOfBirth(),
@@ -103,7 +106,7 @@ public class UserService {
                 ue.setPhoneNumber(userToBeUpdated.getPhoneNumber());
             }
             if(LibraryApiUtils.doesStringValueExist(userToBeUpdated.getPassword())) {
-                ue.setPassword(bCryptPasswordEncoder.encode(userToBeUpdated.getPassword()));
+                /*ue.setPassword(bCryptPasswordEncoder.encode*/userToBeUpdated.getPassword();
             }
             userRepository.save(ue);
             userToBeUpdated = createUserFromEntity(ue);
