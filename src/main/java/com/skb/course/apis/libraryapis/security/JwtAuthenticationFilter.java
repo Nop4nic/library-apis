@@ -1,5 +1,5 @@
 package com.skb.course.apis.libraryapis.security;
-
+/*
 import com.auth0.jwt.JWT;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.skb.course.apis.libraryapis.user.User;
@@ -72,3 +72,4 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
                 SecurityConstants.BEARER_TOKEN_PREFIX + token);
     }
 }
+*/

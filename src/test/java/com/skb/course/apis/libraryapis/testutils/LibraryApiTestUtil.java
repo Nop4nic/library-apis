@@ -6,7 +6,7 @@ import com.skb.course.apis.libraryapis.book.*;
 import com.skb.course.apis.libraryapis.model.common.Gender;
 import com.skb.course.apis.libraryapis.publisher.Publisher;
 import com.skb.course.apis.libraryapis.publisher.PublisherEntity;
-import com.skb.course.apis.libraryapis.user.User;
+//import com.skb.course.apis.libraryapis.user.User;
 import com.skb.course.apis.libraryapis.user.UserEntity;
 
 import java.time.LocalDate;
@@ -46,7 +46,7 @@ public class LibraryApiTestUtil {
     public static Optional<AuthorEntity> createAuthorEntityOptional() {
         return Optional.of(createAuthorEntity());
     }
-
+/*
     public static User createUser(String username) {
 
 
@@ -54,7 +54,7 @@ public class LibraryApiTestUtil {
                 TestConstants.TEST_USER_LAST_NAME, LocalDate.now().minusYears(30), Gender.Female, TestConstants.TEST_USER_PHONE,
                 username + userCtr + "@email.com");
 
-    }
+    }*/
 
     public static UserEntity createUserEntity(String username) {
         UserEntity be = new UserEntity(username, TestConstants.TEST_USER_PASSWORD, TestConstants.TEST_USER_FIRST_NAME,

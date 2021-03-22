@@ -1,5 +1,5 @@
 package com.skb.course.apis.libraryapis;
-
+/*
 import com.skb.course.apis.libraryapis.model.common.Gender;
 import com.skb.course.apis.libraryapis.user.UserEntity;
 import com.skb.course.apis.libraryapis.user.UserRepository;
@@ -41,3 +41,4 @@ public class ApplicationInitializer {
         }
     }
 }
+*/
